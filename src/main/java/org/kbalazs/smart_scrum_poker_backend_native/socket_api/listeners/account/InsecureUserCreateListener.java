@@ -1,7 +1,7 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_api.listeners.account;
 
 import lombok.RequiredArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.kbalazs.smart_scrum_poker_backend_native.api.builders.ResponseEntityBuilder;
 import org.kbalazs.smart_scrum_poker_backend_native.api.exceptions.ApiException;
 import org.kbalazs.smart_scrum_poker_backend_native.api.value_objects.ResponseData;
@@ -20,7 +20,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 
-//@Slf4j
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class InsecureUserCreateListener
@@ -36,7 +36,7 @@ public class InsecureUserCreateListener
     )
         throws AccountException, ApiException, SocketException
     {
-//        log.info("Listener:/account/insecure.user.create: {}", insecureUserCreateRequest);
+        log.info("Listener:/account/insecure.user.create: {}", insecureUserCreateRequest);
 
         InsecureUser newInsecureUser = insecureUserService.create(
             RequestMapperService.mapToEntity(insecureUserCreateRequest),

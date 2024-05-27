@@ -1,7 +1,7 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_api.listeners.poker;
 
 import lombok.RequiredArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.kbalazs.smart_scrum_poker_backend_native.api.exceptions.ApiException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_api.requests.poker.VoteRequest;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoteResponse;
@@ -20,7 +20,7 @@ import java.util.UUID;
 
 import static org.kbalazs.smart_scrum_poker_backend_native.socket_api.enums.SocketDestination.SEND_POKER_VOTE;
 
-//@Slf4j
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class VoteListener
@@ -36,7 +36,7 @@ public class VoteListener
     )
         throws ApiException, StoryPointException, AccountException
     {
-//        log.info("VoteListener:/poker/vote/{}/{}: {}", pokerIdSecure, ticketId, voteRequest);
+        log.info("VoteListener:/poker/vote/{}/{}: {}", pokerIdSecure, ticketId, voteRequest);
 
         InsecureUser insecureUser = voteService.vote(RequestMapperService.mapToEntity(voteRequest));
 

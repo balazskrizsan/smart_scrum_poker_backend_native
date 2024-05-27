@@ -1,7 +1,7 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_api.listeners.poker;
 
 import lombok.RequiredArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.kbalazs.smart_scrum_poker_backend_native.api.builders.ResponseEntityBuilder;
 import org.kbalazs.smart_scrum_poker_backend_native.api.exceptions.ApiException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_api.enums.SocketDestination;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.UUID;
 
-//@Slf4j
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class VoteStopListener
@@ -31,7 +31,7 @@ public class VoteStopListener
     )
         throws ApiException, PokerException
     {
-//        log.info("VoteStopListener:/poker/vote.stop/{}/{}", pokerIdSecure, ticketId);
+        log.info("VoteStopListener:/poker/vote.stop/{}/{}", pokerIdSecure, ticketId);
 
         VotesWithVoteStat votesWithVoteStat = voteStartStopService.stop(pokerIdSecure, ticketId);
 

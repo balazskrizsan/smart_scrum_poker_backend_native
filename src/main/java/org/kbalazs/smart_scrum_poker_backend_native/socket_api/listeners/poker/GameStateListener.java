@@ -1,7 +1,7 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_api.listeners.poker;
 
 import lombok.RequiredArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.kbalazs.smart_scrum_poker_backend_native.api.builders.ResponseEntityBuilder;
 import org.kbalazs.smart_scrum_poker_backend_native.api.exceptions.ApiException;
 import org.kbalazs.smart_scrum_poker_backend_native.api.value_objects.ResponseData;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.UUID;
 
-//@Slf4j
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class GameStateListener
@@ -37,7 +37,7 @@ public class GameStateListener
         @DestinationVariable UUID insecureUserId
     ) throws ApiException, PokerException, AccountException
     {
-//        log.info("Listener:/poker/game.state/{}/{}", pokerIdSecure, insecureUserId);
+        log.info("Listener:/poker/game.state/{}/{}", pokerIdSecure, insecureUserId);
         GameStateResponse gameStateResponse = gameStateService.get(
             new GameStateRequest(pokerIdSecure, insecureUserId, RequestMapperService.getNow())
         );

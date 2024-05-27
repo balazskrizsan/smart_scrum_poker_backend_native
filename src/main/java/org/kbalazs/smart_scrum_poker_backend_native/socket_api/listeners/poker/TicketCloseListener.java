@@ -1,7 +1,7 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_api.listeners.poker;
 
 import lombok.RequiredArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.kbalazs.smart_scrum_poker_backend_native.api.exceptions.ApiException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.TicketClosed;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_api.services.NotificationService;
@@ -14,7 +14,7 @@ import java.util.UUID;
 
 import static org.kbalazs.smart_scrum_poker_backend_native.socket_api.enums.SocketDestination.POKER_TICKET_CLOSE;
 
-//@Slf4j
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class TicketCloseListener
@@ -29,7 +29,7 @@ public class TicketCloseListener
     )
         throws ApiException
     {
-//        log.info("TicketCloseListener:/poker/ticket.close/{}/{}", pokerIdSecure, ticketId);
+        log.info("TicketCloseListener:/poker/ticket.close/{}/{}", pokerIdSecure, ticketId);
 
         notificationService.notifyPokerGame(pokerIdSecure, new TicketClosed(ticketId), POKER_TICKET_CLOSE);
     }
