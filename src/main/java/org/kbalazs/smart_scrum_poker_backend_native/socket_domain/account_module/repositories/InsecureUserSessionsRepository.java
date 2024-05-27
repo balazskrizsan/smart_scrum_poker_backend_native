@@ -1,6 +1,7 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.repositories;
 
 import lombok.NonNull;
+import org.jooq.DSLContext;
 import org.jooq.Record1;
 import org.kbalazs.smart_scrum_poker_backend_native.db.tables.records.InsecureUserSessionsRecord;
 import org.kbalazs.smart_scrum_poker_backend_native.domain_common.repositories.AbstractRepository;
@@ -15,18 +16,10 @@ public class InsecureUserSessionsRepository extends AbstractRepository
 {
     public boolean create(@NonNull InsecureUserSession insecureUserSession)
     {
-        Record1<UUID> returning = getDSLContext()
-            .insertInto(
-                insecureUserSessionsTable,
-                insecureUserSessionsTable.INSECURE_USER_ID_SECURE,
-                insecureUserSessionsTable.SESSION_ID,
-                insecureUserSessionsTable.CREATED_AT
-            )
-            .values(
-                insecureUserSession.insecureUserIdSecure(),
-                insecureUserSession.sessionId(),
-                insecureUserSession.createdAt()
-            )
+        DSLContext ctx = getDSLContext();
+        Record1<UUID> returning = ctx
+            .insertInto(insecureUserSessionsTable)
+            .set(ctx.newRecord(insecureUserSessionsTable, insecureUserSession))
             .onDuplicateKeyIgnore()
             .returningResult(insecureUserSessionsTable.SESSION_ID)
             .fetchOne();

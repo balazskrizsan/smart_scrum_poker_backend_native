@@ -1,7 +1,6 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.repositories;
 
 import lombok.NonNull;
-import org.jooq.Record;
 import org.kbalazs.smart_scrum_poker_backend_native.db.tables.records.InsecureUserRecord;
 import org.kbalazs.smart_scrum_poker_backend_native.domain_common.repositories.AbstractRepository;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.entities.InsecureUser;
@@ -16,27 +15,15 @@ public class InsecureUserRepository extends AbstractRepository
 {
     public InsecureUser create(@NonNull InsecureUser insecureUser) throws AccountException
     {
-        Record newInsecureUser = getDSLContext()
-            .insertInto(
-                insecureUserTable,
-                insecureUserTable.ID_SECURE,
-                insecureUserTable.USER_NAME,
-                insecureUserTable.CREATED_AT
-            )
-            .values(
-                insecureUser.idSecure(),
-                insecureUser.userName(),
-                insecureUser.createdAt()
-            )
-            .returningResult(insecureUserTable.fields())
-            .fetchOne();
+        InsecureUserRecord insecureUserRecord = getDSLContext().newRecord(insecureUserTable, insecureUser);
+        insecureUserRecord.store();
 
-        if (newInsecureUser == null)
+        if (insecureUserRecord.getId() == null)
         {
             throw new AccountException("Insecure user creation failed.");
         }
 
-        return newInsecureUser.into(InsecureUser.class);
+        return insecureUserRecord.into(InsecureUser.class);
     }
 
     public InsecureUser findByIdSecure(@NonNull UUID idSecure) throws AccountException
