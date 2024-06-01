@@ -32,11 +32,6 @@ public class PresetService
     public void setupDb(@NonNull Class<? extends IInsert>[] presets)
         throws InvocationTargetException, InstantiationException, IllegalAccessException
     {
-        System.out.println("setupDb");
-        System.out.println("setupDb");
-        System.out.println("setupDb");
-        System.out.println("setupDb");
-        System.out.println("setupDb");
         for (Class<? extends IInsert> clazz : presets)
         {
             List<Field> diFields = getPrivateFinalNotStaticFields(clazz);
