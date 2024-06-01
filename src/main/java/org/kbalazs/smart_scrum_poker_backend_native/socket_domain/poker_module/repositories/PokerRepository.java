@@ -38,7 +38,7 @@ public class PokerRepository extends AbstractRepository
 
         if (null == record)
         {
-            throw new PokerException("Poker not found: id# " + pokerIdSecure);
+            throw new PokerException("Poker not found: id#" + pokerIdSecure);
         }
 
         return record.into(Poker.class);
