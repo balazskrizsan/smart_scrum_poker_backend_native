@@ -30,11 +30,17 @@ SERVER_ENV=DEV;SERVER_PORT=9998;SERVER_SOCKER_FULL_HOST=wss://localhost:9999/ws;
 ./mvnw spring-boot:build-image -Pnative
 ````
 
+#### Run tests
+
+```shell
+./mvnw clean package -Pnative -Dspring.profiles.active=native -Dserver.port=9999 -Dserver.ssl.enabled=true -Dserver.ssl.key-store=classpath:keystore/dev.p12 -Dserver.ssl.key-store-password=password -Dspring.datasource.url=jdbc:postgresql://localhost:46040/smartscrumpoker -Dspring.datasource.username=admin -Dspring.datasource.password=admin_pass -Dsocket.is-enabled-socket-connect-and-disconnect-listeners=false -Dspring.datasource.driver-class-name=org.postgresql.Driver -Dspring.datasource.hikari.maximum-pool-size=5 -Dspring.datasource.hikari.minimum-idle=5 -Dsocket.is-enabled-socket-connect-and-disconnect-listener=true
+```
+
 #### Create native runnable application
 
 ```shell
-./mvnw clean native:compile -Pnative -Dspring.datasource.url=jdbc:postgresql://localhost:46030/smartscrumpoker -Dspring.datasource.username=admin -Dspring.datasource.password=admin_pass -Dsocket.is-enabled-s ocket-connect-and-disconnect-listeners=false
-```
+./mvnw clean native:compile -Pnative -Dspring.profiles.active=native -Dserver.port=9999 -Dserver.ssl.enabled=true -Dserver.ssl.key-store=classpath:keystore/dev.p12 -Dserver.ssl.key-store-password=password -Dspring.datasource.url=jdbc:postgresql://localhost:46040/smartscrumpoker -Dspring.datasource.username=admin -Dspring.datasource.password=admin_pass -Dsocket.is-enabled-socket-connect-and-disconnect-listeners=false -Dspring.datasource.driver-class-name=org.postgresql.Driver -Dspring.datasource.hikari.maximum-pool-size=5 -Dspring.datasource.hikari.minimum-idle=5 -Dsocket.is-enabled-socket-connect-and-disconnect-liste ner=true
+ ```
 
 ### Start native runnable application on windows
 
