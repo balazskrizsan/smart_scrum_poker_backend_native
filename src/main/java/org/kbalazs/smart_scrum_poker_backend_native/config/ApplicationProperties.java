@@ -9,6 +9,9 @@ public class ApplicationProperties
     @Value("${server.port}")
     private String serverPort;
 
+    @Value("${server.socker.full.host}")
+    private String serverSocketFullHost;
+
     @Value("${spring.datasource.url}")
     private String dataSourceUrl;
 
@@ -29,4 +32,9 @@ public class ApplicationProperties
 
     @Value("${socket.is-enabled-socket-connect-and-disconnect-listeners}")
     public boolean isEnabledSocketConnectAndDisconnectListeners;
+
+    public String siteP12KeyStoreFilePath()
+    {
+        return "classpath:keystore/dev.p12";
+    }
 }
