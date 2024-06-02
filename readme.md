@@ -33,19 +33,16 @@ SERVER_ENV=DEV;SERVER_PORT=9998;SERVER_SOCKER_FULL_HOST=wss://localhost:9999/ws;
 #### Run tests
 
 ```shell
-./mvnw clean package -Pnative -Dspring.profiles.active=native -Dserver.port=9999 -Dserver.ssl.enabled=true -Dserver.ssl.key-store=classpath:keystore/dev.p12 -Dserver.ssl.key-store-password=password -Dspring.datasource.url=jdbc:postgresql://localhost:46040/smartscrumpoker -Dspring.datasource.username=admin -Dspring.datasource.password=admin_pass -Dsocket.is-enabled-socket-connect-and-disconnect-listeners=false -Dspring.datasource.driver-class-name=org.postgresql.Driver -Dspring.datasource.hikari.maximum-pool-size=5 -Dspring.datasource.hikari.minimum-idle=5 -Dsocket.is-enabled-socket-connect-and-disconnect-listener=true
+./mvnw clean package -Pnative -Dspring.profiles.active=native -Dserver.port=9999 -Dserver.socker.full.host=wss://localhost:9999/ws -Dserver.ssl.enabled=true -Dserver.ssl.key-store=classpath:keystore/dev.p12 -Dserver.ssl.key-store-password=password -Dspring.datasource.url=jdbc:postgresql://localhost:46040/smartscrumpoker -Dspring.datasource.username=admin -Dspring.datasource.password=admin_pass -Dsocket.is-enabled-socket-connect-and-disconnect-listeners=false -Dspring.datasource.driver-class-name=org.postgresql.Driver -Dspring.datasource.hikari.maximum-pool-size=5 -Dspring.datasource.hikari.minimum-idle=5 -Dsocket.is-enabled-socket-connect-and-disconnect-listener=true
 ```
 
 #### Create native runnable application
 
 ```shell
-./mvnw clean native:compile -Pnative -Dspring.profiles.active=native -Dserver.port=9999 -Dserver.ssl.enabled=true -Dserver.ssl.key-store=classpath:keystore/dev.p12 -Dserver.ssl.key-store-password=password -Dspring.datasource.url=jdbc:postgresql://localhost:46040/smartscrumpoker -Dspring.datasource.username=admin -Dspring.datasource.password=admin_pass -Dsocket.is-enabled-socket-connect-and-disconnect-listeners=false -Dspring.datasource.driver-class-name=org.postgresql.Driver -Dspring.datasource.hikari.maximum-pool-size=5 -Dspring.datasource.hikari.minimum-idle=5 -Dsocket.is-enabled-socket-connect-and-disconnect-liste ner=true
+./mvnw clean native:compile -Pnative -Dspring.profiles.active=native -Dserver.port=9999 -Dserver.socker.full.host=wss://localhost:9999/ws -Dserver.ssl.enabled=true -Dserver.ssl.key-store=classpath:keystore/dev.p12 -Dserver.ssl.key-store-password=password -Dspring.datasource.url=jdbc:postgresql://localhost:46040/smartscrumpoker -Dspring.datasource.username=admin -Dspring.datasource.password=admin_pass -Dsocket.is-enabled-socket-connect-and-disconnect-listeners=false -Dspring.datasource.driver-class-name=org.postgresql.Driver -Dspring.datasource.hikari.maximum-pool-size=5 -Dspring.datasource.hikari.minimum-idle=5 -Dsocket.is-enabled-socket-connect-and-disconnect-listener=true
  ```
 
 ### Start native runnable application on windows
 
 ```shell
-./smart_scrum_poker_backend_native.exe --spring.profiles.active=native --server.port=1234 --server.ssl.key-store=classpath:keystore/dev.p12 --server.ssl.key-store-password=password --spring.d
-atasource.url=jdbc:postgresql://localhost:46030/smartscrumpoker --spring.datasource.username=admin --spring.datasource.password=admin_pass --spring.datasource.driver-class-name=org.postgresql.D
-river --spring.datasource.hikari.maximum-pool-size=5 --spring.datasource.hikari.minimum-idle=5
-```
+./smart_scrum_poker_backend_native.exe --spring.profiles.active=native --server.port=1234 -Dserver.socker.full.host=wss://localhost:9999/ws --server.ssl.key-store=classpath:keystore/dev.p12 --server.ssl.key-store-password=password --spring.datasource.url=jdbc:postgresql://localhost:46030/smartscrumpoker --spring.datasource.username=admin --spring.datasource.password=admin_pass --spring.datasource.driver-class-name=org.postgresql.Driver --spring.datasource.hikari.maximum-pool-size=5 --spring.datasource.hikari.minimum-idle=5```
