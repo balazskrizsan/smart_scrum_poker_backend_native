@@ -25,8 +25,8 @@ public class VoteStartListener
 
     @MessageMapping("/poker/vote.start/{pokerIdSecure}/{ticketId}")
     public void voteStartListener(
-        @DestinationVariable UUID pokerIdSecure,
-        @DestinationVariable Long ticketId
+        @DestinationVariable("pokerIdSecure") UUID pokerIdSecure,
+        @DestinationVariable("ticketId") Long ticketId
     )
         throws ApiException, PokerException
     {

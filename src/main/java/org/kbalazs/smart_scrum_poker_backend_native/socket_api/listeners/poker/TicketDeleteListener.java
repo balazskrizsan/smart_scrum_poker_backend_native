@@ -27,8 +27,8 @@ public class TicketDeleteListener
 
     @MessageMapping("/poker/ticket.delete/{pokerIdSecure}/{ticketId}")
     public void ticketCloseListener(
-        @DestinationVariable UUID pokerIdSecure,
-        @DestinationVariable Long ticketId
+        @DestinationVariable("pokerIdSecure") UUID pokerIdSecure,
+        @DestinationVariable("ticketId") Long ticketId
     )
         throws ApiException
     {

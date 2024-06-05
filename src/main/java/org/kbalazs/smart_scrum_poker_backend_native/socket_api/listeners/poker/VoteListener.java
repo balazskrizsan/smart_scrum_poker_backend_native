@@ -31,8 +31,8 @@ public class VoteListener
     @MessageMapping("/poker/vote/{pokerIdSecure}/{ticketId}")
     public void voteListener(
         @Payload VoteRequest voteRequest,
-        @DestinationVariable UUID pokerIdSecure,
-        @DestinationVariable Long ticketId
+        @DestinationVariable("pokerIdSecure") UUID pokerIdSecure,
+        @DestinationVariable("ticketId") Long ticketId
     )
         throws ApiException, StoryPointException, AccountException
     {
