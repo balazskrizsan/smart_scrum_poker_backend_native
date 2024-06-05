@@ -16,7 +16,7 @@ public class SqlPresetAspect
     @Autowired
     private PresetService presetService;
 
-    @Pointcut("execution(* org.kbalazs.smart_scrum_poker_backend_native.socket_domain..*(..))")
+    @Pointcut("execution(* org.kbalazs.smart_scrum_poker_backend_native..*(..))")
     protected void findAllSocketDomainTestClasses()
     {
     }

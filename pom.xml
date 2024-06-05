@@ -125,9 +125,6 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
-                <configuration>
-                    <useFile>false</useFile>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.projectlombok</groupId>
@@ -177,24 +174,6 @@
                             <goal>compile</goal>
                             <goal>test-compile</goal>
                         </goals>
-                        <configuration>
-                            <sources>
-                                <source>
-                                    <basedir>target/generated-sources-delombok</basedir>
-                                    <includes>
-                                        <include>**/*.java</include>
-                                    </includes>
-                                </source>
-                            </sources>
-                            <testSources>
-                                <source>
-                                    <basedir>target/test-generated-sources-delombok</basedir>
-                                    <includes>
-                                        <include>**/*.java</include>
-                                    </includes>
-                                </source>
-                            </testSources>
-                        </configuration>
                     </execution>
                 </executions>
                 <dependencies>
@@ -215,15 +194,41 @@
                     <target>21</target>
                     <forceAjcCompile>true</forceAjcCompile>
                     <showWeaveInfo>true</showWeaveInfo>
+                    <sources>
+                        <source>
+                            <basedir>target/generated-sources-delombok</basedir>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                        </source>
+                    </sources>
+                    <testSources>
+                        <source>
+                            <basedir>target/test-generated-sources-delombok</basedir>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                        </source>
+                    </testSources>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.graalvm.buildtools</groupId>
                 <artifactId>native-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <parameters>true</parameters>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
             </plugin>
         </plugins>
     </build>
