@@ -1,6 +1,12 @@
-package org.kbalazs.native_helper.services;
+package org.kbalazs.common.native_build_module.services;
 
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.kbalazs.common.io_module.services.FileService;
+import org.kbalazs.common.native_build_module.exceptions.RuntimeHintsReflection;
+import org.kbalazs.common.native_build_module.value_objects.ReflectionClassList;
+import org.kbalazs.common.templating_module.services.MustacheService;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,12 +16,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+@Service
+@RequiredArgsConstructor
 public class RuntimeHintsReflectionGenerator
 {
-    public void configGenerator(List<String> packageNames, List<Class<?>> classes)
+    private final MustacheService mustacheService;
+    private final FileService fileService;
+
+    public void generate(
+        @NonNull String destinationFile,
+        @NonNull List<String> packageNames,
+        @NonNull List<Class<?>> classes
+    )
+        throws IOException, RuntimeHintsReflection
     {
         List<String> classNames = getClassNamesInPackages(packageNames, classes);
-        classNames.forEach(System.out::println);
+
+        var newCode = mustacheService.execute(
+            "templates/RuntimeHintsReflectionTemplate.mustache",
+            new ReflectionClassList(classNames)
+        );
+
+        String oldCode = fileService.readString(destinationFile);
+        fileService.saveString(destinationFile, newCode);
+
+        if (!oldCode.equals(newCode))
+        {
+            throw new RuntimeHintsReflection("New ReflectionConfiguration generated, please restart the application!");
+        }
     }
 
     private static List<String> getClassNamesInPackages(
@@ -25,7 +53,7 @@ public class RuntimeHintsReflectionGenerator
     {
         List<String> fqns = new ArrayList<>();
 
-        classes.stream().map(Class::getName).forEach(fqns::add);
+        classes.stream().map(c -> c.getName() + ".class").forEach(fqns::add);
 
         packageNames.stream()
             .map(RuntimeHintsReflectionGenerator::getClassNamesInPackage)
