@@ -39,5 +39,8 @@ public class ApplicationProperties
     }
 
     @Value("${native.reflection-configuration-generator.enabled}")
-    public boolean NativeReflectionConfigurationGeneratorEnabled;
+    private boolean nativeReflectionConfigurationGeneratorEnabled;
+
+    @Value("${socket.message-broker-stats-logging-period-seconds}")
+    private long socketMessageBrokerStatsLoggingPeriodSeconds;
 }

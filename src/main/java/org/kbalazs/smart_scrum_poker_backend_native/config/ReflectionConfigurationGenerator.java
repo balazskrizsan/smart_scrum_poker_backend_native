@@ -23,8 +23,12 @@ public class ReflectionConfigurationGenerator
     @PostConstruct
     public void generate() throws RuntimeHintsReflection, IOException
     {
-        log.info("ReflectionConfigurationGenerator status: {}", applicationProperties.NativeReflectionConfigurationGeneratorEnabled);
-        if (!applicationProperties.NativeReflectionConfigurationGeneratorEnabled)
+        boolean isNativeReflectionConfigurationGeneratorEnabled = applicationProperties
+            .isNativeReflectionConfigurationGeneratorEnabled();
+
+        log.info("ReflectionConfigurationGenerator status: {}", isNativeReflectionConfigurationGeneratorEnabled);
+
+        if (!isNativeReflectionConfigurationGeneratorEnabled)
         {
             return;
         }
