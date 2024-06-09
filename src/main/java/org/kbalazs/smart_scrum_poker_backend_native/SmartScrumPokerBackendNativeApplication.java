@@ -11,4 +11,3 @@ public class SmartScrumPokerBackendNativeApplication
         SpringApplication.run(SmartScrumPokerBackendNativeApplication.class, args);
     }
 }
-

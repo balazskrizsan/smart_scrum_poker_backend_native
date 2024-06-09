@@ -37,4 +37,7 @@ public class ApplicationProperties
     {
         return "classpath:keystore/dev.p12";
     }
+
+    @Value("${native.reflection-configuration-generator.enabled}")
+    public boolean NativeReflectionConfigurationGeneratorEnabled;
 }
