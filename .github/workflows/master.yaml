@@ -22,3 +22,14 @@ jobs:
       - name: Build #todo: run tests
         run: mvn  native:compile -Pnative -DskipTests
 
+      - name: File system info
+        run: |
+          echo "===========> github.workspace var: ${{ github.workspace }}"
+          echo "===========> pwd:"
+          pwd
+          echo "===========> ls -hal:"
+          ls -hal
+          echo "===========> ls -hal /src:"
+          ls -hal ./src
+          echo "===========> ls -hal /target:"
+          ls -hal ./target
