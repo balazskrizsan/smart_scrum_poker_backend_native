@@ -67,7 +67,7 @@ jobs:
           SOCKET_MESSAGE_BROKER_STATS_LOGGING_PERIOD_SECONDS: 6000
         run: mvn native:compile -Pnative -Dspring.profiles.active=native
 
-      - uses: /target/
+      - uses: scacap/action-surefire-report@v1
         # if: github.ref != 'refs/heads/master'
         with:
           check_name: Example Surefire Test Report
