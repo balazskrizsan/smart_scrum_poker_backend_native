@@ -70,7 +70,7 @@ jobs:
       - uses: scacap/action-surefire-report@v1
         # if: github.ref != 'refs/heads/master'
         with:
-          check_name: Example Surefire Test Report
+          check_name: Surefire test report
           report_paths: '**/surefire-reports/*.xml'
 
       - name: File system info
