@@ -18,6 +18,6 @@ public class WebSocketLogConfig
     @PostConstruct
     public void init()
     {
-        webSocketMessageBrokerStats.setLoggingPeriod(socketMessageBrokerStatsLoggingPeriodSeconds * 1000);
+        webSocketMessageBrokerStats.setLoggingPeriod(socketMessageBrokerStatsLoggingPeriodSeconds * 60000);
     }
 }
