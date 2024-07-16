@@ -12,6 +12,9 @@ public class ApplicationProperties
     @Value("${server.socker.full.host}")
     private String serverSocketFullHost;
 
+    @Value("${site.frontend.host}")
+    private String siteFrontendHost;
+
     @Value("${spring.datasource.url}")
     private String dataSourceUrl;
 
