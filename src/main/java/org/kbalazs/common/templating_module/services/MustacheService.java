@@ -4,10 +4,12 @@ import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 import lombok.NonNull;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.StringWriter;
 
+@Service
 public class MustacheService
 {
     public String execute(@NonNull String template, @NonNull Object templateData) throws IOException
