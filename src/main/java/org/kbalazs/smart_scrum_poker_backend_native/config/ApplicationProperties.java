@@ -41,6 +41,12 @@ public class ApplicationProperties
         return "classpath:keystore/dev.p12";
     }
 
+    @Value("${server.ssl.key-store-type}")
+    public String serverSslKeyStoreType;
+
+    @Value("${server.ssl.key-store-password}")
+    public String serverSslKeyStorePassword;
+
     @Value("${native.reflection-configuration-generator.enabled}")
     private boolean nativeReflectionConfigurationGeneratorEnabled;
 
