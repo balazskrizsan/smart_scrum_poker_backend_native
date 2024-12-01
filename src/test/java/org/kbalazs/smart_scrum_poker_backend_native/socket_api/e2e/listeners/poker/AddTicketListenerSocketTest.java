@@ -45,13 +45,14 @@ public class AddTicketListenerSocketTest extends AbstractE2eSocketTest
         String expectedHttpStatus = HttpStatus.OK.getReasonPhrase();
         String expectedDestination = SEND__POKER__NEW_TICKET_CREATE.getValue();
         int expectedTicketsInDb = 1;
+        String testedSubscribeUrl = "/queue/reply-" + PokerFakeBuilder.defaultIdSecure1;
 
         // Act
         StompFrameHandler stompHandler = buildStompFrameHandler(
             completableFuture,
             ResponseEntity_ResponseData_NewTicketResponse.class
         );
-        stompSession.subscribe("/user/queue/reply", stompHandler);
+        stompSession.subscribe(testedSubscribeUrl, stompHandler);
         stompSession.send("/app/poker/new.ticket.create", testedPokerStartRequest);
 
         // Assert
