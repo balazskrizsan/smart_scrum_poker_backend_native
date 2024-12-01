@@ -2,12 +2,14 @@ package org.kbalazs.smart_scrum_poker_backend_native.socket_api.services;
 
 import lombok.NonNull;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_api.requests.account.InsecureUserCreateRequest;
+import org.kbalazs.smart_scrum_poker_backend_native.socket_api.requests.poker.AddTicketRequest;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_api.requests.poker.StartRequest;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_api.requests.poker.VoteRequest;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.entities.InsecureUser;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.entities.Poker;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.entities.Ticket;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.entities.Vote;
+import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.AddTicket;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.StartPoker;
 
 import java.time.LocalDateTime;
@@ -57,5 +59,11 @@ public class RequestMapperService
             insecureUserCreateRequest.userName(),
             getNow()
         );
+    }
+
+
+    public static AddTicket mapToEntity(@NonNull AddTicketRequest request)
+    {
+        return new AddTicket(request.userIdSecure(), request.pokerIdSecure(), request.ticketName());
     }
 }

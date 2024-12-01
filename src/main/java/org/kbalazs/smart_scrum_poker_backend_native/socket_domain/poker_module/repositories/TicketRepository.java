@@ -1,6 +1,7 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.repositories;
 
 import lombok.NonNull;
+import org.kbalazs.smart_scrum_poker_backend_native.db.tables.records.TicketRecord;
 import org.kbalazs.smart_scrum_poker_backend_native.domain_common.repositories.AbstractRepository;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.entities.Ticket;
 import org.springframework.stereotype.Repository;
@@ -20,7 +21,7 @@ public class TicketRepository extends AbstractRepository
             .execute();
     }
 
-    public List<Ticket> searchByPokerId(@NonNull Long pokerId)
+    public List<Ticket> searchByPokerId(long pokerId)
     {
         return getDSLContext()
             .selectFrom(ticketTable)
@@ -38,7 +39,7 @@ public class TicketRepository extends AbstractRepository
             .execute();
     }
 
-    public void deactivate(Long ticketId)
+    public void deactivate(long ticketId)
     {
         getDSLContext()
             .update(ticketTable)
@@ -53,5 +54,13 @@ public class TicketRepository extends AbstractRepository
             .deleteFrom(ticketTable)
             .where(ticketTable.ID.eq(ticketId))
             .execute();
+    }
+
+    public Ticket addOne(@NonNull Ticket ticket)
+    {
+        TicketRecord addedTicket = getDSLContext().newRecord(ticketTable, ticket);
+        addedTicket.store();
+
+        return addedTicket.into(Ticket.class);
     }
 }
