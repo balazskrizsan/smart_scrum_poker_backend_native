@@ -3,7 +3,7 @@
     <!-- Configure the database connection here -->
     <jdbc>
         <driver>org.postgresql.Driver</driver>
-        <url>jdbc:postgresql://localhost:46030/smartscrumpoker</url>
+        <url>jdbc:postgresql://localhost:47050/smartscrumpoker</url>
         <user>admin</user>
         <password>admin_pass</password>
 
