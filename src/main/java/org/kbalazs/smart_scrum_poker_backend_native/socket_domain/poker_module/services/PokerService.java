@@ -9,6 +9,7 @@ import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.e
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.repositories.PokerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -33,5 +34,10 @@ public class PokerService
     public Map<UUID, Poker> searchWatchedPokers(@NonNull UUID insecureUserIdSecure)
     {
         return pokerRepository.searchWatchedPokers(insecureUserIdSecure);
+    }
+
+    public List<Poker> searchByInsecureUserId(@NonNull UUID insecureUserIdSecure)
+    {
+        return pokerRepository.searchByInsecureUserId(insecureUserIdSecure);
     }
 }
