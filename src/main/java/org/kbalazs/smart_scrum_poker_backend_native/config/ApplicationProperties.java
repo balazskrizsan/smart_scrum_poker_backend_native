@@ -9,7 +9,7 @@ public class ApplicationProperties
     @Value("${server.port}")
     private String serverPort;
 
-    @Value("${server.socker.full.host}")
+    @Value("${server.socket.full.host}")
     private String serverSocketFullHost;
 
     @Value("${site.frontend.host}")
