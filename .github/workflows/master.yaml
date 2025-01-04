@@ -47,11 +47,15 @@ jobs:
           java --version
           native-image --version
 
+      - name: Hosts file update "localhost.balazskrizsan.com" -> 127.0.0.1
+        run: |
+          sudo echo "127.0.0.1 	localhost.balazskrizsan.com" | sudo tee -a /etc/hosts
+
       - name: Build
         env:
           SERVER_ENV: DEV
           SERVER_PORT: 9999
-          SERVER_SOCKET_FULL_HOST: wss://localhost:9999/ws
+          SERVER_SOCKET_FULL_HOST: wss://localhost.balazskrizsan.com:9999/ws
           SERVER_SSL_ENABLED: true
           SERVER_SSL_KEY_STORE: classpath:keystore/dev.p12
           SERVER_SSL_KEY_STORE_PASSWORD: password
