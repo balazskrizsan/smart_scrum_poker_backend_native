@@ -3,6 +3,9 @@
     "includes": [
       {
         "pattern": "logback-spring.xml"
+      },
+      {
+        "pattern": "logback-test.xml"
       }
     ]
   }
