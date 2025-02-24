@@ -13,6 +13,8 @@ import static org.springframework.aot.hint.MemberCategory.PUBLIC_FIELDS;
 @Configuration
 @RegisterReflectionForBinding({
     org.springframework.http.ResponseEntity.class,
+    ch.qos.logback.classic.LoggerContext.class,
+    ch.qos.logback.core.spi.ContextAwareBase.class,
     org.kbalazs.smart_scrum_poker_backend_native.db.tables.records.FlywaySchemaHistoryRecord.class,
     org.kbalazs.smart_scrum_poker_backend_native.db.tables.records.InGamePlayersRecord.class,
     org.kbalazs.smart_scrum_poker_backend_native.db.tables.records.InsecureUserRecord.class,
@@ -58,6 +60,8 @@ public class ReflectionConfiguration
         {
             hints.reflection()
                 .registerType(org.springframework.http.ResponseEntity.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
+                .registerType(ch.qos.logback.classic.LoggerContext.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
+                .registerType(ch.qos.logback.core.spi.ContextAwareBase.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.db.tables.records.FlywaySchemaHistoryRecord.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.db.tables.records.InGamePlayersRecord.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.db.tables.records.InsecureUserRecord.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)

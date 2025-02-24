@@ -1,5 +1,7 @@
 package org.kbalazs.smart_scrum_poker_backend_native.config;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.core.spi.ContextAwareBase;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +48,9 @@ public class ReflectionConfigurationGenerator
                     "org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker"
                 ),
                 List.of(
-                    ResponseEntity.class
+                    ResponseEntity.class,
+                    LoggerContext.class,
+                    ContextAwareBase.class
                 )
             );
     }
