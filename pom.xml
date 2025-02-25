@@ -231,6 +231,7 @@
                 <artifactId>native-maven-plugin</artifactId>
                 <configuration>
                     <buildArgs>
+                        <buildArg>-H:+UnlockExperimentalVMOptions</buildArg>
                         <buildArg>-H:IncludeResources=logback-spring.xml</buildArg>
                     </buildArgs>
                 </configuration>

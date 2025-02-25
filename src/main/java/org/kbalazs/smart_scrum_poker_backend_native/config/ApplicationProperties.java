@@ -52,4 +52,10 @@ public class ApplicationProperties
 
     @Value("${socket.message-broker-stats-logging-period-seconds}")
     private long socketMessageBrokerStatsLoggingPeriodSeconds;
+
+    @Value("${logback.logstash.enabled}")
+    private boolean logbackLogstashEnabled;
+
+    @Value("${logback.logstash.full_host}")
+    private String logbackLogstashFullHost;
 }
