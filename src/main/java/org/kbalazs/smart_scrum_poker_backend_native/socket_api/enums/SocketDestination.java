@@ -11,6 +11,7 @@ public enum SocketDestination
     POKER_TICKET_DELETE("/app/poker/ticket.delete"),
     POKER_ROUND_STOP("/app/poker/vote.stop"),
     SEND_POKER_VOTE("/app/poker/vote"),
+    SEND__POKER__VOTER_LEAVING("/app/poker/voter_leaving"),
     SEND__POKER__NEW_TICKET_CREATE("/app/poker/new.ticket.create"),
     SEND__POKER__MY_TICKETS("/app/poker/my.tickets"),
     SEND_POKER_VOTE_NEW_JOINER("/app/poker/vote.new_joiner"),

@@ -35,6 +35,7 @@ import static org.springframework.aot.hint.MemberCategory.PUBLIC_FIELDS;
     org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.GameStateRequest.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.StartPoker.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.StartPokerResponse.class,
+    org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.VoterLeaving.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.VoteStat.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.VotesWithVoteStat.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.VoteValues.class,
@@ -48,6 +49,7 @@ import static org.springframework.aot.hint.MemberCategory.PUBLIC_FIELDS;
     org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.TicketDeleteResponse.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoteNewJoinerResponse.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoteResponse.class,
+    org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoterLeavingResponse.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoteStopResponse.class,
 })
 @ImportRuntimeHints(ReflectionConfiguration.AppRuntimeHintsRegistrar.class)
@@ -82,6 +84,7 @@ public class ReflectionConfiguration
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.GameStateRequest.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.StartPoker.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.StartPokerResponse.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
+                .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.VoterLeaving.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.VoteStat.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.VotesWithVoteStat.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.VoteValues.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
@@ -95,6 +98,7 @@ public class ReflectionConfiguration
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.TicketDeleteResponse.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoteNewJoinerResponse.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoteResponse.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
+                .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoterLeavingResponse.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoteStopResponse.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
             ;
         }

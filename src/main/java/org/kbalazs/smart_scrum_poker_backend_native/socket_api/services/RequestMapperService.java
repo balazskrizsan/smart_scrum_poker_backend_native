@@ -61,7 +61,6 @@ public class RequestMapperService
         );
     }
 
-
     public static AddTicket mapToEntity(@NonNull AddTicketRequest request)
     {
         return new AddTicket(request.userIdSecure(), request.pokerIdSecure(), request.ticketName());
