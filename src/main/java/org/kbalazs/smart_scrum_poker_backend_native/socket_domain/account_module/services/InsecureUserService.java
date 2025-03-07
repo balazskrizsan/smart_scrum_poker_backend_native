@@ -1,5 +1,6 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.services;
 
+import lombok.extern.log4j.Log4j2;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.entities.InsecureUserSession;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.exceptions.AccountException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.repositories.InsecureUserRepository;
@@ -14,6 +15,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class InsecureUserService
 {
     private final InsecureUserRepository insecureUserRepository;
@@ -32,6 +34,8 @@ public class InsecureUserService
         ));
 
         insecureUserSessionsService.add(new InsecureUserSession(newUser.idSecure(), sessionId, insecureUser.createdAt()));
+
+        log.info("New insecure user created: {}", newUser); // TODO: test, monitor
 
         return newUser;
     }
