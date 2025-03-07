@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.log4j.Log4j2;
 import org.jooq.Configuration;
 import org.kbalazs.smart_scrum_poker_backend_native.domain_common.services.JooqService;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.exceptions.AccountException;
@@ -20,6 +21,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Log4j2
 public class StartService
 {
     PokerService pokerService;
@@ -36,25 +38,36 @@ public class StartService
             (Configuration config) -> transactionalCreate(poker, tickets)
         );
 
+        log.info("New poker started: {}", newPoker); // @TODO: test, monitor
+
         return new StartPokerResponse(newPoker);
     }
 
     private Poker transactionalCreate(@NonNull Poker poker, @NonNull List<Ticket> tickets) throws PokerException
     {
-        Poker newPoker = pokerService.create(new Poker(
-            null,
-            uuidService.getRandom(),
-            poker.name(),
-            poker.createdAt(),
-            poker.createdBy()
-        ));
+        try
+        {
+            Poker newPoker = pokerService.create(new Poker(
+                null,
+                uuidService.getRandom(),
+                poker.name(),
+                poker.createdAt(),
+                poker.createdBy()
+            ));
 
-        ticketService.createAll(
-            tickets.stream()
-                .map(t -> new Ticket(null, null, newPoker.id(), t.name(), t.isActive()))
-                .toList()
-        );
+            ticketService.createAll(
+                tickets.stream()
+                    .map(t -> new Ticket(null, null, newPoker.id(), t.name(), t.isActive()))
+                    .toList()
+            );
 
-        return newPoker;
+            return newPoker;
+        }
+        catch (Exception e)
+        {
+            log.error("Poker creation error: {}", e.getMessage(), e); // TODO: test, monitor
+
+            throw e;
+        }
     }
 }
