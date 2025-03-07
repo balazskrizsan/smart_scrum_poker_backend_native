@@ -1,12 +1,12 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.services;
 
-import lombok.extern.log4j.Log4j2;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.entities.InsecureUser;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.entities.InsecureUserSession;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.exceptions.AccountException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.repositories.InsecureUserRepository;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.entities.InsecureUser;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.common_module.services.UuidService;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class InsecureUserService
 {
     private final InsecureUserRepository insecureUserRepository;
