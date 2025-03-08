@@ -9,6 +9,9 @@ public class ApplicationProperties
     @Value("${server.port}")
     private String serverPort;
 
+    @Value("${server.env}")
+    private String serverEnv;
+
     @Value("${server.socket.full.host}")
     private String serverSocketFullHost;
 
