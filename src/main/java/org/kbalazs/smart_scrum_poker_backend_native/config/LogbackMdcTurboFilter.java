@@ -19,9 +19,9 @@ public class LogbackMdcTurboFilter extends TurboFilter
     @Override
     public FilterReply decide(Marker marker, Logger logger, Level level, String s, Object[] objects, Throwable throwable)
     {
-        if (MDC.get("serverEnv") == null)
+        if (MDC.get("env") == null)
         {
-            MDC.put("serverEnv", serverEnv);
+            MDC.put("env", serverEnv);
         }
 
         return FilterReply.NEUTRAL;
