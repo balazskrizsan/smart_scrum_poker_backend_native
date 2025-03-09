@@ -16,6 +16,9 @@
 
 ### IDEA setup
 
+#### Envs:
+PROD, UAT, LOCAL-PROD, DEV
+
 #### Env vars:
 
 ```
