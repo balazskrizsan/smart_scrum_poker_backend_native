@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record InsecureUserSession(
-    UUID insecureUserIdSecure,
-    UUID sessionId,
+    @NonNull UUID insecureUserIdSecure,
+    @NonNull UUID sessionId,
     @NonNull LocalDateTime createdAt
 )
 {

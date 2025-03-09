@@ -3,6 +3,7 @@ package org.kbalazs.smart_scrum_poker_backend_native.socket_domain.common_module
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.kbalazs.smart_scrum_poker_backend_native.common.factories.LocalDateTimeFactory;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_api.exceptions.SocketException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_api.services.SocketConnectionHandlerService;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Slf4j
 public class SocketConnectedService
 {
     SocketConnectionHandlerService socketConnectionHandlerService;
@@ -26,7 +28,17 @@ public class SocketConnectedService
     // @todo: test
     public ConnectResponse connect(MessageHeaders headers) throws SocketException
     {
-        UUID insecureUserIdSecure = socketConnectionHandlerService.getInsecureUserIdSecure(headers);
+        UUID insecureUserIdSecure;
+        try
+        {
+            insecureUserIdSecure = socketConnectionHandlerService.getInsecureUserIdSecure(headers);
+        }
+        catch (SocketException e)
+        {
+            log.info("Socket connection without insecureUserId"); // @todo: test, monitor
+
+            return new ConnectResponse(false, null);
+        }
         UUID simpSessionId = socketConnectionHandlerService.getSessionId(headers);
 
         InsecureUserSession insecureUserSession = new InsecureUserSession(
