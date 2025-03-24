@@ -25,15 +25,17 @@ public class LogbackConfig
     @PostConstruct
     public void setupLogger()
     {
+        String currentEnv = applicationProperties.getServerEnv();
         log.info(
-            "LogbackConfig setup / logstash enabled: {}, url: {}",
+            "LogbackConfig setup / logstash enabled: {}, env: {}, url: {}",
             applicationProperties.isLogbackLogstashEnabled(),
+            currentEnv,
             applicationProperties.getLogbackLogstashFullHost()
         );
 
         LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
         context.reset();
-        context.addTurboFilter(new LogbackMdcTurboFilter(applicationProperties.getServerEnv()));
+        context.addTurboFilter(new LogbackMdcTurboFilter(currentEnv));
 
         ch.qos.logback.classic.Logger rootLogger = context.getLogger(Logger.ROOT_LOGGER_NAME);
         rootLogger.detachAndStopAllAppenders();
