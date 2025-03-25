@@ -8,6 +8,7 @@ import ch.qos.logback.core.ConsoleAppender;
 import jakarta.annotation.PostConstruct;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.encoder.LogstashEncoder;
@@ -18,9 +19,11 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
+@FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)
 public class LogbackConfig
 {
-    private final ApplicationProperties applicationProperties;
+    ApplicationProperties applicationProperties;
+    LogBackState logBackState;
 
     @PostConstruct
     public void setupLogger()
@@ -35,7 +38,7 @@ public class LogbackConfig
 
         LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
         context.reset();
-        context.addTurboFilter(new LogbackMdcTurboFilter(currentEnv));
+        context.addTurboFilter(new LogbackMdcTurboFilter(currentEnv, logBackState));
 
         ch.qos.logback.classic.Logger rootLogger = context.getLogger(Logger.ROOT_LOGGER_NAME);
         rootLogger.detachAndStopAllAppenders();
@@ -57,7 +60,7 @@ public class LogbackConfig
 
         PatternLayoutEncoder consoleEncoder = new PatternLayoutEncoder();
         consoleEncoder.setContext(context);
-        consoleEncoder.setPattern("%highlight(%d {env=%X{env}} [%thread]) %highlight(%-5level) %cyan(%logger{35}) - %msg%n");
+        consoleEncoder.setPattern("%highlight(%d [%thread]) %highlight(%-5level) %cyan(%logger{35}) - %msg%n");
         consoleEncoder.setCharset(java.nio.charset.StandardCharsets.UTF_8);
         consoleEncoder.start();
 

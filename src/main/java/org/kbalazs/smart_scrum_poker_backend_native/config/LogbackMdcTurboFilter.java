@@ -15,14 +15,20 @@ import org.slf4j.Marker;
 public class LogbackMdcTurboFilter extends TurboFilter
 {
     String serverEnv;
+    LogBackState logBackState;
+
+    public static final String LONG_TERM_MDC_NAME = "long_term";
+    public static final String ENV_MDC_NAME = "env";
 
     @Override
     public FilterReply decide(Marker marker, Logger logger, Level level, String s, Object[] objects, Throwable throwable)
     {
-        if (MDC.get("env") == null)
+        if (MDC.get(ENV_MDC_NAME) == null)
         {
-            MDC.put("env", serverEnv);
+            MDC.put(ENV_MDC_NAME, serverEnv);
         }
+
+        MDC.put(LONG_TERM_MDC_NAME, String.valueOf(logBackState.getThreadLocalLongTermLogState().get()));
 
         return FilterReply.NEUTRAL;
     }
