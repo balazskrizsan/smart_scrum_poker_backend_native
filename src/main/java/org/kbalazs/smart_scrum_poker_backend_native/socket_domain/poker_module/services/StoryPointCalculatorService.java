@@ -1,50 +1,65 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.services;
 
+import lombok.NonNull;
+import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.enums.SizeEnum;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.exceptions.StoryPointException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.VoteValues;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.NavigableMap;
+import java.util.TreeMap;
+
 @Service
 public class StoryPointCalculatorService
 {
-    public Short calculate(VoteValues voteValues) throws StoryPointException
+    private static final NavigableMap<Integer, Integer> POINTS_MAP = new TreeMap<>()
+    {{
+        put(4, 1);    // 1 1 1 1 = 4
+        put(5, 2);    // 1 1 1 2 = 5
+        put(7, 3);    // 1 1 2 2 = 6 | 1 1 1 3 = 6 | 1 1 2 3 = 7 | 1 2 2 2 = 7
+        put(9, 5);    // 2 2 2 2 = 8 | 3 2 2 2 = 9
+        put(11, 8);   // 3 3 2 2 = 10 | 3 3 3 2 = 11 | 3 3 3 1 = 10
+        put(12, 13);  // 3 3 3 3 = 12
+        put(20, 20);  // 1 1 1 10 = 14 | 3 3 3 10 = 19
+        put(30, 50);  // 1 1 10 10 = 22 | 3 3 10 10 = 26
+        put(Integer.MAX_VALUE, 100); // all the rest
+    }};
+
+    public Short calculate(@NonNull final VoteValues voteValues) throws StoryPointException
     {
-        return switch (voteValues)
+        validateVoteValues(voteValues);
+
+        if (voteValues.questionMark() || voteValues.coffeeMug())
         {
-            case VoteValues v when v.questionMark() || v.coffeeMug() -> null;
+            return 0;
+        }
 
-            case VoteValues v when v.uncertainty() == 1 && v.complexity() == 1 && v.effort() == 1 -> 1;
-            case VoteValues v when v.uncertainty() == 1 && v.complexity() == 1 && v.effort() == 2 -> 2;
-            case VoteValues v when v.uncertainty() == 1 && v.complexity() == 1 && v.effort() == 3 -> 5;
+        int total = voteValues.uncertainty().val()  // s=1/m=2/l=3/xxl=4
+                    + voteValues.complexity().val() // s=1/m=2/l=3/xxl=4
+                    + voteValues.effort().val()     // s=1/m=2/l=3/xxl=4
+                    + voteValues.risk().val();      // s=1/m=2/l=3/xxl=4
 
-            case VoteValues v when v.uncertainty() == 1 && v.complexity() == 2 && v.effort() == 1 -> 2;
-            case VoteValues v when v.uncertainty() == 1 && v.complexity() == 2 && v.effort() == 2 -> 3;
-            case VoteValues v when v.uncertainty() == 1 && v.complexity() == 2 && v.effort() == 3 -> 5;
+        return POINTS_MAP.ceilingEntry(total).getValue().shortValue();
+    }
 
-            case VoteValues v when v.uncertainty() == 1 && v.complexity() == 3 && v.effort() == 1 -> 3;
-            case VoteValues v when v.uncertainty() == 1 && v.complexity() == 3 && v.effort() == 2 -> 5;
-            case VoteValues v when v.uncertainty() == 1 && v.complexity() == 3 && v.effort() == 3 -> 8;
+    private void validateVoteValues(@NonNull final VoteValues voteValues) throws StoryPointException
+    {
+        validateSingleValue("uncertainty", voteValues.uncertainty());
+        validateSingleValue("complexity", voteValues.complexity());
+        validateSingleValue("effort", voteValues.effort());
+        validateSingleValue("risk", voteValues.risk());
+    }
 
-            case VoteValues v when v.uncertainty() == 2 && v.complexity() == 1 && v.effort() == 1 -> 3;
-            case VoteValues v when v.uncertainty() == 2 && v.complexity() == 1 && v.effort() == 2 -> 5;
-            case VoteValues v when v.uncertainty() == 2 && v.complexity() == 1 && v.effort() == 3 -> 8;
+    private void validateSingleValue(final @NonNull String fieldName, @NonNull final SizeEnum size) throws
+        StoryPointException
+    {
+        List<SizeEnum> allowedValues = Arrays.stream(SizeEnum.values()).toList();
 
-            case VoteValues v when v.uncertainty() == 2 && v.complexity() == 2 && v.effort() == 1 -> 5;
-            case VoteValues v when v.uncertainty() == 2 && v.complexity() == 2 && v.effort() == 2 -> 5;
-            case VoteValues v when v.uncertainty() == 2 && v.complexity() == 2 && v.effort() == 3 -> 8;
-
-            case VoteValues v when v.uncertainty() == 2 && v.complexity() == 3 && v.effort() == 1 -> 5;
-            case VoteValues v when v.uncertainty() == 2 && v.complexity() == 3 && v.effort() == 2 -> 8;
-
-            case VoteValues v when v.uncertainty() == 3 && v.complexity() == 2 && v.effort() == 1 -> 8;
-            case VoteValues v when v.uncertainty() == 3 && v.complexity() == 2 && v.effort() == 2 -> 8;
-            case VoteValues v when v.uncertainty() == 3 && v.complexity() == 2 && v.effort() == 3 -> 13;
-
-            case VoteValues v when v.uncertainty() == 3 && v.complexity() == 3 && v.effort() == 1 -> 8;
-            case VoteValues v when v.uncertainty() == 3 && v.complexity() == 3 && v.effort() == 2 -> 13;
-            case VoteValues v when v.uncertainty() == 3 && v.complexity() == 3 && v.effort() == 3 -> 13;
-
-            default -> throw new StoryPointException("Not implemented");
-        };
+        if (!allowedValues.contains(size))
+        {
+            throw new StoryPointException("Size validation error: " + fieldName + " is invalid: " + size.val());
+        }
     }
 }

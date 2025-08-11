@@ -9,6 +9,7 @@ import org.kbalazs.smart_scrum_poker_backend_native.helpers.poker_module.fake_bu
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.entities.InsecureUser;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.exceptions.AccountException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.entities.Vote;
+import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.enums.SizeEnum;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.services.VoteService;
 import org.kbalazs.smart_scrum_poker_backend_native.test_aspects.SqlPreset;
 import lombok.SneakyThrows;
@@ -56,7 +57,7 @@ public class VoteService_VoteTest extends AbstractIntegrationTest
         // Act - Assert
         assertThatThrownBy(() -> createInstance(VoteService.class).vote(testedVote))
             .isInstanceOf(AccountException.class)
-            .hasMessage("User not found");
+            .hasMessage("User not found; idSecure#10000000-0000-0000-0000-000000002001");
     }
 
     @Test
@@ -65,10 +66,10 @@ public class VoteService_VoteTest extends AbstractIntegrationTest
     public void sendVoteMultipleTimes_fromSecondTheFirstRowWillBeUpdated()
     {
         // Arrange
-        Vote testedVote1 = new VoteFakeBuilder().id(null).uncertainty((short) 1).complexity((short) 1).effort((short) 1).build();
-        Vote testedVote2 = new VoteFakeBuilder().id(null).uncertainty((short) 3).complexity((short) 3).effort((short) 3).build();
+        Vote testedVote1 = new VoteFakeBuilder().id(null).uncertainty(SizeEnum.S.val()).complexity(SizeEnum.S.val()).effort(SizeEnum.S.val()).build();
+        Vote testedVote2 = new VoteFakeBuilder().id(null).uncertainty(SizeEnum.L.val()).complexity(SizeEnum.L.val()).effort(SizeEnum.L.val()).build();
 
-        Vote expectedVote = new VoteFakeBuilder().id(1L).uncertainty((short) 3).complexity((short) 3).effort((short) 3).calculatedPoint((short) 13).build();
+        Vote expectedVote = new VoteFakeBuilder().id(1L).uncertainty(SizeEnum.L.val()).complexity(SizeEnum.L.val()).effort(SizeEnum.L.val()).calculatedPoint((short) 13).build();
 
         // Act
         VoteService service = createInstance(VoteService.class);

@@ -21,6 +21,7 @@ public class VoteRequestFakeBuilder
     short voteUncertainty = VoteFakeBuilder.defaultUncertainty;
     short voteComplexity = VoteFakeBuilder.defaultComplexity;
     short voteEffort = VoteFakeBuilder.defaultEffort;
+    short voteRisk = VoteFakeBuilder.defaultRisk;
 
     public VoteRequest build()
     {
@@ -30,7 +31,8 @@ public class VoteRequestFakeBuilder
             ticketId,
             voteUncertainty,
             voteComplexity,
-            voteEffort
+            voteEffort,
+            voteRisk
         );
     }
 }

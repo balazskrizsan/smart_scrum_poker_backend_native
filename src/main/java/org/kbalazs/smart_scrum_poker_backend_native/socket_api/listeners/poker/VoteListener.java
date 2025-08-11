@@ -1,5 +1,6 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_api.listeners.poker;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.kbalazs.smart_scrum_poker_backend_native.api.exceptions.ApiException;
@@ -23,16 +24,15 @@ import static org.kbalazs.smart_scrum_poker_backend_native.socket_api.enums.Sock
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class VoteListener
-{
+public class VoteListener {
     private final VoteService voteService;
     private final NotificationService notificationService;
 
     @MessageMapping("/poker/vote/{pokerIdSecure}/{ticketId}")
     public void voteListener(
         @Payload VoteRequest voteRequest,
-        @DestinationVariable("pokerIdSecure") UUID pokerIdSecure,
-        @DestinationVariable("ticketId") Long ticketId
+        @NonNull @DestinationVariable("pokerIdSecure") UUID pokerIdSecure,
+        @NonNull @DestinationVariable("ticketId") Long ticketId
     )
         throws ApiException, StoryPointException, AccountException
     {

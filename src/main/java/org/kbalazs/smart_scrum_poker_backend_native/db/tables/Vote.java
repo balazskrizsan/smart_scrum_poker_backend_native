@@ -14,7 +14,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row8;
+import org.jooq.Row9;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -33,7 +33,7 @@ import org.kbalazs.smart_scrum_poker_backend_native.db.tables.records.VoteRecord
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Vote extends TableImpl<VoteRecord> {
 
-    private static final long serialVersionUID = 742074502;
+    private static final long serialVersionUID = 221069726;
 
     /**
      * The reference instance of <code>public.vote</code>
@@ -72,6 +72,11 @@ public class Vote extends TableImpl<VoteRecord> {
      * The column <code>public.vote.effort</code>.
      */
     public final TableField<VoteRecord, Short> EFFORT = createField(DSL.name("effort"), org.jooq.impl.SQLDataType.SMALLINT.nullable(false), this, "");
+
+    /**
+     * The column <code>public.vote.risk</code>.
+     */
+    public final TableField<VoteRecord, Short> RISK = createField(DSL.name("risk"), org.jooq.impl.SQLDataType.SMALLINT.nullable(false), this, "");
 
     /**
      * The column <code>public.vote.calculated_point</code>.
@@ -177,11 +182,11 @@ public class Vote extends TableImpl<VoteRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row8 type methods
+    // Row9 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Long, Long, Short, Short, Short, Short, LocalDateTime, UUID> fieldsRow() {
-        return (Row8) super.fieldsRow();
+    public Row9<Long, Long, Short, Short, Short, Short, Short, LocalDateTime, UUID> fieldsRow() {
+        return (Row9) super.fieldsRow();
     }
 }

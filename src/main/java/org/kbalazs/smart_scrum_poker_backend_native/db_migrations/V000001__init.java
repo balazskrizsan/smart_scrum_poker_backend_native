@@ -49,6 +49,7 @@ public class V000001__init extends AbstractBaseJooqMigration
             .column("uncertainty", SMALLINT.nullable(false))
             .column("complexity", SMALLINT.nullable(false))
             .column("effort", SMALLINT.nullable(false))
+            .column("risk", SMALLINT.nullable(false))
             .column("calculated_point", SMALLINT.nullable(false))
             .column("created_at", TIMESTAMP.nullable(false))
             .column("created_by", UUID.nullable(true))

@@ -77,6 +77,6 @@ public class StartService_StartTest extends AbstractIntegrationTest
             .start(testedPoker, testedTickets)
         )
             .isInstanceOf(AccountException.class)
-            .hasMessage("User not found");
+            .hasMessage("User not found; idSecure#10000000-0000-0000-0000-000000002001");
     }
 }

@@ -8,6 +8,7 @@ import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.exceptions.AccountException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.services.InsecureUserService;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.entities.Vote;
+import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.enums.SizeEnum;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.exceptions.StoryPointException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.repositories.VoteRepository;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.VoteStat;
@@ -41,8 +42,16 @@ public class VoteService
             vote.uncertainty(),
             vote.complexity(),
             vote.effort(),
+            vote.risk(),
             storyPointCalculatorService.calculate(
-                new VoteValues(false, false, vote.uncertainty(), vote.complexity(), vote.effort())
+                new VoteValues(
+                    false,
+                    false,
+                    SizeEnum.of(vote.uncertainty()),
+                    SizeEnum.of(vote.complexity()),
+                    SizeEnum.of(vote.effort()),
+                    SizeEnum.of(vote.risk())
+                )
             ),
             vote.createdAt(),
             vote.createdBy()
@@ -88,7 +97,8 @@ public class VoteService
     private VotesWithVoteStat calculateStat(@NonNull Map<UUID, Vote> votes)
     {
         Supplier<Stream<Vote>> valueStreamSupplier = () -> votes.values().stream();
-        Supplier<Stream<Short>> calculatedPointStreamSupplier = () -> valueStreamSupplier.get().map(Vote::calculatedPoint);
+        Supplier<Stream<Short>> calculatedPointStreamSupplier = () ->
+            valueStreamSupplier.get().map(Vote::calculatedPoint);
 
         double avg = valueStreamSupplier.get().mapToDouble(Vote::calculatedPoint).average().orElseThrow();
         short min = calculatedPointStreamSupplier.get().min(Short::compare).orElseThrow();

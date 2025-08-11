@@ -11,6 +11,7 @@ public record Vote(
     short uncertainty,
     short complexity,
     short effort,
+    short risk,
     Short calculatedPoint,
     @NonNull LocalDateTime createdAt,
     @NonNull UUID createdBy

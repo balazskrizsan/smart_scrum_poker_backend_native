@@ -35,7 +35,7 @@ public class InsecureUserRepository extends AbstractRepository
 
         if (null == user)
         {
-            throw new AccountException("User not found");
+            throw new AccountException("User not found; idSecure#" + idSecure);
         }
 
         return user.into(InsecureUser.class);

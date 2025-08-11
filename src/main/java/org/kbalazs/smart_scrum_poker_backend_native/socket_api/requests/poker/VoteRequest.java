@@ -1,14 +1,17 @@
 package org.kbalazs.smart_scrum_poker_backend_native.socket_api.requests.poker;
 
+import lombok.NonNull;
+
 import java.util.UUID;
 
 public record VoteRequest(
-    UUID userIdSecure,
-    UUID pokerIdSecure,
+    @NonNull UUID userIdSecure,
+    @NonNull UUID pokerIdSecure,
     long ticketId,
     short voteUncertainty,
     short voteComplexity,
-    short voteEffort
+    short voteEffort,
+    short risk
 )
 {
 }

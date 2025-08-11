@@ -1,12 +1,13 @@
 package org.kbalazs.smart_scrum_poker_backend_native.helpers.poker_module.fake_builders;
 
-import org.kbalazs.smart_scrum_poker_backend_native.helpers.account_module.fake_builders.InsecureUserFakeBuilder;
-import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.entities.Vote;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
+import org.kbalazs.smart_scrum_poker_backend_native.helpers.account_module.fake_builders.InsecureUserFakeBuilder;
+import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.entities.Vote;
+import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.enums.SizeEnum;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,9 +30,10 @@ public class VoteFakeBuilder
     public static final UUID defaultCreatedBy3 = InsecureUserFakeBuilder.defaultIdSecure1;
     public static final UUID defaultCreatedBy4 = InsecureUserFakeBuilder.defaultIdSecure3;
     public static final UUID defaultCreatedBy5 = InsecureUserFakeBuilder.defaultIdSecure4;
-    public static final short defaultUncertainty = 1;
-    public static final short defaultComplexity = 2;
-    public static final short defaultEffort = 3;
+    public static final short defaultUncertainty = SizeEnum.S.val();
+    public static final short defaultComplexity = SizeEnum.M.val();
+    public static final short defaultEffort = SizeEnum.L.val();
+    public static final short defaultRisk = SizeEnum.L.val();
     public static final short defaultCalculatedPoint = 5;
     public static final short defaultCalculatedPoint4 = 13;
 
@@ -48,6 +50,7 @@ public class VoteFakeBuilder
     short uncertainty = defaultUncertainty;
     short complexity = defaultComplexity;
     short effort = defaultEffort;
+    short risk = defaultRisk;
     short calculatedPoint = defaultCalculatedPoint;
     short calculatedPoint4 = defaultCalculatedPoint4;
     LocalDateTime createdAt = LocalDateTime.of(2020, 11, 22, 11, 22, 33);
@@ -59,27 +62,27 @@ public class VoteFakeBuilder
 
     public Vote build()
     {
-        return new Vote(id, ticketId, uncertainty, complexity, effort, calculatedPoint, createdAt, createdBy);
+        return new Vote(id, ticketId, uncertainty, complexity, effort, risk, calculatedPoint, createdAt, createdBy);
     }
 
     public Vote build2()
     {
-        return new Vote(id2, ticketId2, uncertainty, complexity, effort, calculatedPoint, createdAt, createdBy2);
+        return new Vote(id2, ticketId2, uncertainty, complexity, effort, risk, calculatedPoint, createdAt, createdBy2);
     }
 
     public Vote build3()
     {
-        return new Vote(id3, ticketId3, uncertainty, complexity, effort, calculatedPoint, createdAt, createdBy3);
+        return new Vote(id3, ticketId3, uncertainty, complexity, effort, risk, calculatedPoint, createdAt, createdBy3);
     }
 
     public Vote build4()
     {
-        return new Vote(id4, ticketId4, uncertainty, complexity, effort, calculatedPoint4, createdAt, createdBy4);
+        return new Vote(id4, ticketId4, uncertainty, complexity, effort, risk, calculatedPoint4, createdAt, createdBy4);
     }
 
     public Vote build5()
     {
-        return new Vote(id5, ticketId5, uncertainty, complexity, effort, calculatedPoint, createdAt, createdBy5);
+        return new Vote(id5, ticketId5, uncertainty, complexity, effort, risk, calculatedPoint, createdAt, createdBy5);
     }
 
     public List<Vote> build3to5()

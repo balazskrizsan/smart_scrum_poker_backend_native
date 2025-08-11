@@ -9,6 +9,7 @@ import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.entities.Poker;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.entities.Ticket;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.entities.Vote;
+import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.exceptions.StoryPointException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.AddTicket;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.poker_module.value_objects.StartPoker;
 
@@ -37,7 +38,7 @@ public class RequestMapperService
         );
     }
 
-    public static Vote mapToEntity(@NonNull VoteRequest voteRequest)
+    public static Vote mapToEntity(@NonNull final VoteRequest voteRequest)
     {
         return new Vote(
             null,
@@ -45,13 +46,14 @@ public class RequestMapperService
             voteRequest.voteUncertainty(),
             voteRequest.voteComplexity(),
             voteRequest.voteEffort(),
+            voteRequest.risk(),
             null,
             getNow(),
             voteRequest.userIdSecure()
         );
     }
 
-    public static InsecureUser mapToEntity(@NonNull InsecureUserCreateRequest insecureUserCreateRequest)
+    public static InsecureUser mapToEntity(@NonNull final InsecureUserCreateRequest insecureUserCreateRequest)
     {
         return new InsecureUser(
             null,
@@ -61,7 +63,7 @@ public class RequestMapperService
         );
     }
 
-    public static AddTicket mapToEntity(@NonNull AddTicketRequest request)
+    public static AddTicket mapToEntity(@NonNull final AddTicketRequest request)
     {
         return new AddTicket(request.userIdSecure(), request.pokerIdSecure(), request.ticketName());
     }
