@@ -41,7 +41,7 @@ public class ApplicationProperties
 
     public String siteP12KeyStoreFilePath()
     {
-        return "classpath:keystore/dev.p12";
+        return "classpath:keystore/certificate.p12";
     }
 
     @Value("${server.ssl.key-store-type}")
