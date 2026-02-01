@@ -20,14 +20,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)
-public class LogbackConfig
-{
+public class LogbackConfig {
     ApplicationProperties applicationProperties;
     LogBackState logBackState;
 
     @PostConstruct
-    public void setupLogger()
-    {
+    public void setupLogger() {
         String currentEnv = applicationProperties.getServerEnv();
         log.info(
             "LogbackConfig setup / logstash enabled: {}, env: {}, url: {}",
@@ -43,44 +41,43 @@ public class LogbackConfig
         ch.qos.logback.classic.Logger rootLogger = context.getLogger(Logger.ROOT_LOGGER_NAME);
         rootLogger.detachAndStopAllAppenders();
         rootLogger.setLevel(Level.INFO);
-        if (applicationProperties.isLogbackLogstashEnabled())
-        {
+        if (applicationProperties.isLogbackLogstashEnabled()) {
             rootLogger.addAppender(getLogstashTcpSocketAppender(context));
         }
 
-        rootLogger.addAppender(getiLoggingEventConsoleAppender(context));
+        rootLogger.addAppender(getLoggingEventConsoleAppender(context));
+
+        log.info("LogbackConfig setup");
     }
 
-    private ConsoleAppender<ILoggingEvent> getiLoggingEventConsoleAppender(@NonNull LoggerContext context)
-    {
+    private @NonNull ConsoleAppender<ILoggingEvent> getLoggingEventConsoleAppender(@NonNull LoggerContext context) {
         log.info("LogbackConfig console created");
 
-        ConsoleAppender<ILoggingEvent> consoleAppender = new ConsoleAppender<>();
-        consoleAppender.setContext(context);
+        ConsoleAppender<ILoggingEvent> appender = new ConsoleAppender<>();
+        appender.setContext(context);
 
-        PatternLayoutEncoder consoleEncoder = new PatternLayoutEncoder();
-        consoleEncoder.setContext(context);
-        consoleEncoder.setPattern("%highlight(%d [%thread]) %highlight(%-5level) %cyan(%logger{35}) - %msg%n");
-        consoleEncoder.setCharset(java.nio.charset.StandardCharsets.UTF_8);
-        consoleEncoder.start();
+        PatternLayoutEncoder encoder = new PatternLayoutEncoder();
+        encoder.setContext(context);
+        encoder.setPattern("%highlight(%d [%thread]) %highlight(%-5level) %cyan(%logger{35}) - %msg%n");
+        encoder.setCharset(java.nio.charset.StandardCharsets.UTF_8);
+        encoder.start();
 
-        consoleAppender.setEncoder(consoleEncoder);
-        consoleAppender.start();
+        appender.setEncoder(encoder);
+        appender.start();
 
-        return consoleAppender;
+        return appender;
     }
 
-    private LogstashTcpSocketAppender getLogstashTcpSocketAppender(@NonNull LoggerContext context)
-    {
+    private LogstashTcpSocketAppender getLogstashTcpSocketAppender(@NonNull LoggerContext context) {
         log.info("LogbackConfig logstash created");
 
-        LogstashTcpSocketAppender logstashAppender = new LogstashTcpSocketAppender();
-        logstashAppender.setContext(context);
-        logstashAppender.addDestination(applicationProperties.getLogbackLogstashFullHost());
+        LogstashTcpSocketAppender appender = new LogstashTcpSocketAppender();
+        appender.setContext(context);
+        appender.addDestination(applicationProperties.getLogbackLogstashFullHost());
 
-        logstashAppender.setEncoder(new LogstashEncoder());
-        logstashAppender.start();
+        appender.setEncoder(new LogstashEncoder());
+        appender.start();
 
-        return logstashAppender;
+        return appender;
     }
 }
