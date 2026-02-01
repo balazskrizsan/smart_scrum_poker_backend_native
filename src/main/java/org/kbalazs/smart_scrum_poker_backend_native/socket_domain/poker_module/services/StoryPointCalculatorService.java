@@ -49,7 +49,7 @@ public class StoryPointCalculatorService
         validateSingleValue("uncertainty", voteValues.uncertainty());
         validateSingleValue("complexity", voteValues.complexity());
         validateSingleValue("effort", voteValues.effort());
-        validateSingleValue("risk", voteValues.risk());
+        validateSingleValue("voteRisk", voteValues.risk());
     }
 
     private void validateSingleValue(final @NonNull String fieldName, @NonNull final SizeEnum size) throws

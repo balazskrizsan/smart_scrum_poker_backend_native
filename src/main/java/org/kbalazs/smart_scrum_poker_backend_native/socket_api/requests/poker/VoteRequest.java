@@ -11,7 +11,7 @@ public record VoteRequest(
     short voteUncertainty,
     short voteComplexity,
     short voteEffort,
-    short risk
+    short voteRisk
 )
 {
 }

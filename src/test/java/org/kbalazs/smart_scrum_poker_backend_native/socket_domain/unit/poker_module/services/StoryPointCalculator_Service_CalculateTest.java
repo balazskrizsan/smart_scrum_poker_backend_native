@@ -37,7 +37,7 @@ public class StoryPointCalculator_Service_CalculateTest extends AbstractTest {
         // Act - Assert
         assertThatThrownBy(() -> createInstance(StoryPointCalculatorService.class).calculate(testedVote))
             .isInstanceOf((StoryPointException.class))
-            .hasMessage("Size validation error: risk is invalid: 4");
+            .hasMessage("Size validation error: voteRisk is invalid: 4");
     }
 
     @SneakyThrows

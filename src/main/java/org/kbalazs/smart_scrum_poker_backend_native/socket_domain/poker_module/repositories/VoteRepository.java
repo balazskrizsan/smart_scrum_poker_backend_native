@@ -26,6 +26,7 @@ public class VoteRepository extends AbstractRepository
             .set(voteTable.UNCERTAINTY, vote.uncertainty())
             .set(voteTable.COMPLEXITY, vote.complexity())
             .set(voteTable.EFFORT, vote.effort())
+            .set(voteTable.RISK, vote.risk())
             .set(voteTable.CALCULATED_POINT, vote.calculatedPoint())
             .execute();
     }
