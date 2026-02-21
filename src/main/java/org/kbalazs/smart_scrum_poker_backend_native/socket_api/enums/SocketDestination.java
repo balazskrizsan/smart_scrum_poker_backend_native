@@ -8,6 +8,7 @@ public enum SocketDestination
     POKER_GAME_STATE("/app/poker/game.state"),
     POKER_ROUND_START("/app/poker/vote.start"),
     POKER_TICKET_CLOSE("/app/poker/ticket.close"),
+    SEND__POKER__TICKET_OPEN("/app/poker/ticket.open"),
     POKER_TICKET_DELETE("/app/poker/ticket.delete"),
     POKER_ROUND_STOP("/app/poker/vote.stop"),
     SEND_POKER_VOTE("/app/poker/vote"),
