@@ -22,6 +22,7 @@ public class VoteStartStopService
     public void start(@NonNull UUID pokerIdSecure, long ticketId) throws PokerException
     {
         pokerService.findByIdSecure(pokerIdSecure);
+        voteService.deleteVotesByTicketId(ticketId);
         ticketService.activate(ticketId);
     }
 

@@ -46,4 +46,12 @@ public class VoteRepository extends AbstractRepository
                 )
             );
     }
+
+    public void deleteByTicketId(@NonNull Long ticketId)
+    {
+        getDSLContext()
+            .deleteFrom(voteTable)
+            .where(voteTable.TICKET_ID.eq(ticketId))
+            .execute();
+    }
 }

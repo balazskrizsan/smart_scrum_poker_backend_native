@@ -83,18 +83,29 @@ public class VoteService
         return calculateStat(votes);
     }
 
+    public void deleteVotesByTicketId(@NonNull Long ticketId)
+    {
+        // @todo: archive before delete
+        voteRepository.deleteByTicketId(ticketId);
+    }
+
     public Map<Long, VotesWithVoteStat> getStatByTicketIds(@NonNull List<Long> tickedIds)
     {
         Map<Long, Map<UUID, Vote>> votes = voteRepository.getVotesWithTicketGroupByTicketIds(tickedIds);
 
         Map<Long, VotesWithVoteStat> votesWithVoteStats = new HashMap<>();
 
-        votes.forEach((key, voteMap) -> votesWithVoteStats.put(key, calculateStat(voteMap)));
+        votes.forEach((key, voteMap) -> {
+            if (voteMap != null) // @todo: test
+            {
+                votesWithVoteStats.put(key, calculateStat(voteMap));
+            }
+        });
 
         return votesWithVoteStats;
     }
 
-    private VotesWithVoteStat calculateStat(@NonNull Map<UUID, Vote> votes)
+    private @NonNull VotesWithVoteStat calculateStat(@NonNull Map<UUID, Vote> votes)
     {
         Supplier<Stream<Vote>> valueStreamSupplier = () -> votes.values().stream();
         Supplier<Stream<Short>> calculatedPointStreamSupplier = () ->
