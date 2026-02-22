@@ -47,6 +47,7 @@ import static org.springframework.aot.hint.MemberCategory.PUBLIC_FIELDS;
     org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.StartResponse.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.TicketClosed.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.TicketDeleteResponse.class,
+    org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.TicketOpened.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoteNewJoinerResponse.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoteResponse.class,
     org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoterLeavingResponse.class,
@@ -96,6 +97,7 @@ public class ReflectionConfiguration
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.StartResponse.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.TicketClosed.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.TicketDeleteResponse.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
+                .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.TicketOpened.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoteNewJoinerResponse.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoteResponse.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
                 .registerType(org.kbalazs.smart_scrum_poker_backend_native.socket_api.responses.poker.VoterLeavingResponse.class, PUBLIC_FIELDS, INVOKE_PUBLIC_METHODS, INVOKE_PUBLIC_CONSTRUCTORS)
