@@ -26,8 +26,8 @@ public class TicketRepository extends AbstractRepository
         return getDSLContext()
             .selectFrom(ticketTable)
             .where(ticketTable.POKER_ID.eq(pokerId))
-            .fetch()
-            .into(Ticket.class);
+            .orderBy(ticketTable.ID)
+            .fetchInto(Ticket.class);
     }
 
     public void activate(long ticketId)
