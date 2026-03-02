@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.Configuration;
+import org.kbalazs.smart_scrum_poker_backend_native.common.servies.Slf4jLongTermLoggerService;
 import org.kbalazs.smart_scrum_poker_backend_native.domain_common.services.JooqService;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.exceptions.AccountException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.services.InsecureUserService;
@@ -29,8 +30,10 @@ public class StartService
     UuidService uuidService;
     TicketService ticketService;
     JooqService jooqService;
+    Slf4jLongTermLoggerService slf4jLongTermLoggerService;
 
-    public StartPokerResponse start(@NonNull Poker poker, @NonNull List<Ticket> tickets) throws PokerException, AccountException
+    public StartPokerResponse start(@NonNull Poker poker, @NonNull List<Ticket> tickets)
+    throws PokerException, AccountException
     {
         insecureUserService.findByIdSecure(poker.createdBy());
 
@@ -38,7 +41,7 @@ public class StartService
             (Configuration config) -> transactionalCreate(poker, tickets)
         );
 
-        log.info("New poker started: {}", newPoker); // @TODO: test, monitor
+        slf4jLongTermLoggerService.info(this.getClass(), "New poker started: {}", newPoker); // @TODO: test, monitor
 
         return new StartPokerResponse(newPoker);
     }
