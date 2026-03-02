@@ -58,7 +58,7 @@ public class LogbackConfig {
 
         PatternLayoutEncoder encoder = new PatternLayoutEncoder();
         encoder.setContext(context);
-        encoder.setPattern("%highlight(%d [%thread]) %highlight(%-5level) %cyan(%logger{35}) - %msg%n");
+        encoder.setPattern("%highlight(%d [%thread]) %green([env=%X{env}] [long_term=%X{long_term}]) %highlight(%-5level) %cyan(%logger{35}) - %msg%n");
         encoder.setCharset(java.nio.charset.StandardCharsets.UTF_8);
         encoder.start();
 
