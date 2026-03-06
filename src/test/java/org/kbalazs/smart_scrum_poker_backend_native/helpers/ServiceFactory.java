@@ -2,6 +2,7 @@ package org.kbalazs.smart_scrum_poker_backend_native.helpers;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.kbalazs.smart_scrum_poker_backend_native.common.servies.Slf4jLongTermLoggerService;
 import org.kbalazs.smart_scrum_poker_backend_native.helpers.exceptions.ServiceFactoryException;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.repositories.InsecureUserRepository;
 import org.kbalazs.smart_scrum_poker_backend_native.socket_domain.account_module.repositories.InsecureUserSessionsRepository;
@@ -33,6 +34,7 @@ public class ServiceFactory
     protected final VoteRepository voteRepository;
     protected final InGamePlayersRepository inGamePlayersRepository;
     protected final InsecureUserSessionsRepository insecureUserSessionsRepository;
+    protected final Slf4jLongTermLoggerService slf4jLongTermLoggerService;
 
     Map<String, Map<String, Object>> oneTimeMocks = new HashMap<>();
 
